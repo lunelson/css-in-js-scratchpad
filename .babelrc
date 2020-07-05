@@ -5,6 +5,7 @@
     "linaria/babel"
   ],
   "plugins": [
-    "babel-plugin-styled-components"
+    "babel-plugin-styled-components",
+    "babel-plugin-emotion"
   ]
 }

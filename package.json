@@ -13,9 +13,12 @@
     "@babel/preset-react": "^7.10.1",
     "@compiled/css-in-js": "^0.4.7",
     "@compiled/jest-css-in-js": "^0.4.7",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
     "@testing-library/react": "^10.3.0",
     "astroturf": "^0.10.4",
     "babel-plugin-styled-components": "^1.10.7",
+    "jest-emotion": "^10.0.32",
     "jest-styled-components": "^7.0.2",
     "linaria": "^1.3.3",
     "linaria-jest": "^0.0.4",
@@ -24,5 +27,8 @@
     "react-dom": "^16.13.1",
     "react-test-renderer": "^16.13.1",
     "styled-components": "^5.1.1"
+  },
+  "devDependencies": {
+    "babel-plugin-emotion": "^10.0.33"
   }
 }
