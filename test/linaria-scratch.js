@@ -1,38 +1,56 @@
+({
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react",
+      "linaria/babel"
+    ],
+  },
+  "plugins": [
+    "jsdom-quokka-plugin"
+  ]
+});
+
 import React from 'react';
-import { css } from 'linaria';
-// import { logLinaria, debugLinaria } from '../';
+import { render, screen } from '@testing-library/react';
+import { styled } from 'linaria/react';
+import { css, cx } from 'linaria';
 
-import { render } from '@testing-library/react';
-import testRenderer from 'react-test-renderer';
-import pretty from 'pretty';
-
-// linaria
-import { reactSerializer as linariaSerializer } from 'linaria-jest';
-const { print: printLinaria } = linariaSerializer;
-
-
-const header = css`
-  text-transform: uppercase;
+const MyBox = styled.div`
+  color: red;
+  height: 200px;
 `;
 
-// const html = testRenderer.create(<h1 className={header}>Hello world</h1>).toTree(); //?
-const html = render(<h1 className={header}>Hello world</h1>);
+const myStyles = css`
+  background-color: lightblue;
+  background-color: green;
+`;
 
-const h1s = document.getElementsByTagName('h1');
-Array.from(h1s).map(heading => heading.textContent); //?
+const danger = css`
+  color: red;
+`
 
-document.getElementsByTagName("head")[0].innerHTML; //?
-document.head.innerHTML; //?
-document.body.innerHTML; //?
-document.getElementsByTagName('style').length; //?
-document.querySelectorAll('style').length; //?
-document.styleSheets.length; //?
+const base = css`
+  background-color: darkgreen;
+  color: beige;
+`
 
-// const styleTags = document.getElementsByTagName('style'); //?
-// Array.from(styleTags).map(tag => tag.textContent); //?
+const globalStyles = css`
+  body {
+    color: red;
+  }
+`;
 
+const testContainer = render(
+  <>
+    <div className={cx(base, danger)} >
+      <MyBox className={css`color: green;`} />
+    </div>
+  </>
+).container;
 
-// printLinaria(HTML, str => str); //?
-
-// Then use it as a class name
-// debugLinaria(<h1 className={header}>Hello world</h1>);
+testContainer.ownerDocument.getElementsByTagName('style').length; //?
+testContainer.ownerDocument.querySelectorAll('style').length; //?
+testContainer.ownerDocument.styleSheets.length; //?
+testContainer.ownerDocument.styleSheets.map(sheet => sheet.toString()).join('\n'); //?
+screen.debug(testContainer);
