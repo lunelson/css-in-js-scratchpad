@@ -11,7 +11,7 @@
       [
         "@emotion/babel-plugin",
         {
-          autoLabel: "never",
+          autoLabel: "always",
         }
       ],
       // require('../test-babel-plugin'),
@@ -25,7 +25,7 @@
 import React from 'react';
 import { render, prettyDOM } from '@testing-library/react';
 import prettier from 'prettier';
-import { Global, css } from '@emotion/react';
+import { css } from '@emotion/css';
 import styled from '@emotion/styled';
 import { createSerializer } from '@emotion/jest';
 
@@ -42,7 +42,7 @@ ${serializer.serialize(container, {indent: '  '}, '  ', Infinity, null, (html) =
   `);
 }
 
-function debugAlt(component) {
+function debug2(component) {
 
   const container = render(component).container;
 
@@ -62,10 +62,6 @@ const MyBox = styled.div`
 `;
 
 const mqtest = css`
-  &+& {
-    margin-top: 50px;
-    ${(() => css`margin-bottom: 6px;`)()}
-  }
   ${css`padding-top: 20px; background-color: yellow;`}
   ${[
     '@media screen {',
@@ -75,7 +71,7 @@ const mqtest = css`
 `;
 
 const stackBase = css`
-  && > * + * { margin-top: var(--stack-gap); }
+  & > * + * { margin-top: var(--stack-gap); }
 `;
 
 const stack = gap => [stackBase, css`--stack-gap: ${gap};`]
@@ -97,7 +93,6 @@ const globalStyles = css`
 
 debug(
   <>
-    <Global styles={globalStyles} />
     <div css={stack(20)}>this is 20</div>
     <div css={stack(40)}>this is 40</div>
     <div css={[mqtest]}>

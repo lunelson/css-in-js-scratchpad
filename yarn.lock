@@ -1078,6 +1078,17 @@
     "@emotion/memoize" "0.7.4"
     stylis "^4.0.1"
 
+"@emotion/css@^11.0.0-next.13":
+  version "11.0.0-next.13"
+  resolved "https://registry.yarnpkg.com/@emotion/css/-/css-11.0.0-next.13.tgz#18a926dd0b0e985e0ea14cbc3dc0311b43f11b4a"
+  integrity sha512-aNxotsUJ+kr8Nh/gkLLMf6yBS5HTIXq0caonOpidB5BenL9E8441RxJDEaTnTZUWvT97f4EieYrcadqDdqz48A==
+  dependencies:
+    "@emotion/babel-plugin" "^11.0.0-next.13"
+    "@emotion/cache" "^11.0.0-next.13"
+    "@emotion/serialize" "^0.11.15-next.2"
+    "@emotion/sheet" "1.0.0-next.2"
+    "@emotion/utils" "1.0.0-next.0"
+
 "@emotion/eslint-plugin@^11.0.0-next.10":
   version "11.0.0-next.10"
   resolved "https://registry.yarnpkg.com/@emotion/eslint-plugin/-/eslint-plugin-11.0.0-next.10.tgz#0cb387c44d0ba9354c564c25bbafcabee2b29d2e"
