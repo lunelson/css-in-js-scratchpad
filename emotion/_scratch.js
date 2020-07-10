@@ -55,9 +55,13 @@ const MyBox = styled.div`
   height: 200px;
 `;
 
-const myStyles = css`
-  background-color: lightblue;
-  background-color: green;
+const dummy = css`content: 'joke';`;
+
+const what = css`
+  display: grid;
+  transition: all 0.5s;
+  user-select: none;
+  background: linear-gradient(to bottom, white, black);
 `;
 
 const danger = css`
@@ -65,21 +69,26 @@ const danger = css`
 `
 
 const base = css`
-  background-color: darkgreen;
   color: blue;
 `
 
 const globalStyles = css`
   body {
-    color: red;
+    color: blue;
   }
 `;
 
 debug(
   <>
+    <div css={dummy}></div>
     <Global styles={globalStyles} />
-    <div css={[base, danger]} >
+    <div css={what}>
+      <p>is this thing on?</p>
+    </div>
+    <div css={[base, what]} >
       <MyBox css={css`color: green;`} />
     </div>
   </>
 );
+
+document.styleSheets[0] //?
