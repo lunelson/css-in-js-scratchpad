@@ -8,9 +8,9 @@
     ],
     plugins: [
       [
-        "babel-plugin-emotion",
+        "@emotion/babel-plugin",
         {
-          autoLabel: false,
+          autoLabel: "never",
         }
       ],
       // require('../test-babel-plugin'),
@@ -25,7 +25,7 @@
 import React from 'react';
 import { render, prettyDOM } from '@testing-library/react';
 import prettier from 'prettier';
-import { Global, css, jsx } from '@emotion/core';
+import { Global, css, jsx } from '@emotion/react';
 import styled from '@emotion/styled';
 
 function debug(component) {
@@ -55,9 +55,11 @@ const MyBox = styled.div`
   height: 200px;
 `;
 
-const myStyles = css`
-  background-color: lightblue;
-  background-color: green;
+const what = css`
+  display: grid;
+  transition: all 0.5s;
+  user-select: none;
+  background: linear-gradient(to bottom, white, black);
 `;
 
 const danger = css`
@@ -65,20 +67,22 @@ const danger = css`
 `
 
 const base = css`
-  background-color: darkgreen;
   color: blue;
 `
 
 const globalStyles = css`
   body {
-    color: red;
+    color: blue;
   }
 `;
 
 debug(
   <>
     <Global styles={globalStyles} />
-    <div css={[base, danger]} >
+    <div css={what}>
+      <p>is this thing on?</p>
+    </div>
+    <div css={[base, what]} >
       <MyBox css={css`color: green;`} />
     </div>
   </>
