@@ -1,4 +1,5 @@
 //#region setup
+
 ({
   babel: {
     presets: [
@@ -9,9 +10,10 @@
       [
         "babel-plugin-emotion",
         {
-          autoLabel: true,
+          autoLabel: false,
         }
-      ]
+      ],
+      // require('../test-babel-plugin'),
     ]
   },
   plugins: [
@@ -21,10 +23,31 @@
 
 /** @jsx jsx */
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
-
+import { render, prettyDOM } from '@testing-library/react';
+import prettier from 'prettier';
 import { Global, css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
+
+function debug(component) {
+
+  const container = render(
+    <>
+      <Global styles={globalStyles} />
+      <div css={[base, danger]} >
+        <MyBox css={css`color: green;`} />
+      </div>
+    </>
+  ).container;
+
+  console.log(`
+--------------------------------------------------------------------------------
+
+${prettier.format(container.ownerDocument.styleSheets.map(sheet => sheet.toString()).join('\n'), { parser: 'css'})}
+
+${prettyDOM(container)}
+  `);
+}
+
 //#endregion
 
 const MyBox = styled.div`
@@ -38,12 +61,12 @@ const myStyles = css`
 `;
 
 const danger = css`
-  color: red;
+  color: orange;
 `
 
 const base = css`
   background-color: darkgreen;
-  color: beige;
+  color: blue;
 `
 
 const globalStyles = css`
@@ -52,14 +75,11 @@ const globalStyles = css`
   }
 `;
 
-const testContainer = render(
+debug(
   <>
     <Global styles={globalStyles} />
     <div css={[base, danger]} >
       <MyBox css={css`color: green;`} />
     </div>
   </>
-).container;
-
-testContainer.ownerDocument.styleSheets.map(sheet => sheet.toString()).join('\n'); //?
-screen.debug(testContainer);
+);
