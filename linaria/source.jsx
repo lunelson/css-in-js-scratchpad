@@ -19,20 +19,26 @@ const danger = css`
 
 const base = css`
   background-color: darkgreen;
+  margin-left: 2rem;
   color: beige;
 `
 
 const globalStyles = css`
+:global() {
   body {
     color: red;
   }
+}
 `;
 
 const Test = () => (
   <>
-    <p className={myStyles}></p>
+    <p className={cx(myStyles)}>This is the content of a paragraph</p>
+    <SubComponent/>
     <div className={cx(base, danger)} >
       <MyBox className={css`color: green;`} />
     </div>
   </>
 )
+
+export default Test;

@@ -24,8 +24,7 @@ const result = transformSync(`
       "@babel/preset-react"
     ],
     plugins: [
-      "astroturf/plugin",
-      // require('../test-babel-plugin'),
+      [ 'astroturf/plugin', { writeFiles: false, enableCssProp: true } ]
     ]
   });
 // result.code;//?
