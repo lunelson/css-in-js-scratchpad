@@ -23,32 +23,56 @@ emphasize.registerLanguage('css', langCss)
 emphasize.registerLanguage('html', langHtml)
 
 const filename = `${__dirname}/${relFile}`;
-const testSource = readFileSync(filename, 'utf8');
-const { code, metadata: { linaria: { rules } } } = transformSync(`
-  ${testSource}
-  container = render(<Test/>).container;
-`, {
-    filename,
-    presets: [
-      "@babel/preset-env",
-      "@babel/preset-react",
-      "linaria/babel"
-    ],
-  });
-let container;
-eval(code);
-
-console.clear();
-console.log(`
------------------------------------------------
-${emphasize.highlight('css', Object.keys(rules).map(cn => {
+const { addHook } = require('pirates');
+const revert = addHook((code, filename) => {
+  const result = transformSync(`${code}; const { container } = render(<Test/>);`, {
+      filename,
+      presets: [
+        "@babel/preset-env",
+        "@babel/preset-react",
+        "linaria/babel"
+      ],
+    });
   return `
-/* ${rules[cn].displayName} */
-${cn} {
-  ${rules[cn].cssText.trim()}
-}
-`.trim();
-}).join('\n\n')).value}
+const { render } = require('@testing-library/react');
+${result.code}
+exports.container = container;
+exports.metadata = ${JSON.stringify(result.metadata)};
+    `;
+  },
+  { exts: ['.jsx'] }
+);
+const { container, metadata } = require(filename);
+revert();
+/// GOOD REQUIRE UP TO NOW
+console.log(container);
+console.log(JSON.stringify(metadata));
 
-${emphasize.highlight('html', pretty(container.innerHTML)).value}
-`);
+// const { code, metadata: { linaria: { rules } } } = transformSync(`
+//   ${testSource}
+//   container = render(<Test/>).container;
+// `, {
+//     filename,
+//     presets: [
+//       "@babel/preset-env",
+//       "@babel/preset-react",
+//       "linaria/babel"
+//     ],
+//   });
+// let container;
+// eval(code);
+
+// console.clear();
+// console.log(`
+// -----------------------------------------------
+// ${emphasize.highlight('css', Object.keys(rules).map(cn => {
+//   return `
+// /* ${rules[cn].displayName} */
+// ${cn} {
+//   ${rules[cn].cssText.trim()}
+// }
+// `.trim();
+// }).join('\n\n')).value}
+
+// ${emphasize.highlight('html', pretty(container.innerHTML)).value}
+// `);

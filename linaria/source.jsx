@@ -2,6 +2,8 @@ import React from 'react';
 import { styled } from 'linaria/react';
 import { css, cx } from 'linaria';
 
+import SubComponent from './source2';
+
 const MyBox = styled.div`
   color: red;
   height: 200px;
