@@ -5,8 +5,11 @@ import { css, cx } from 'linaria';
 import SubComponent from './source2';
 
 const MyBox = styled.div`
+  --font-alias: ${props => props.fa||'sans'};
   color: red;
   height: 200px;
+  &:hover { color: blue; }
+  & > * { margin-top: 1em; }
 `;
 
 const myStyles = css`
@@ -15,6 +18,8 @@ const myStyles = css`
 
 const danger = css`
   color: red;
+  &:hover { color: blue; }
+  & > * { margin-top: 1em; }
 `
 
 const base = css`
@@ -36,7 +41,7 @@ const Test = () => (
     <p className={cx(myStyles)}>This is the content of a paragraph</p>
     <SubComponent/>
     <div className={cx(base, danger)} >
-      <MyBox className={css`color: green;`} />
+      <MyBox fa='mono' className={css`color: green;`} />
     </div>
   </>
 )

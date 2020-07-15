@@ -26,6 +26,7 @@ const revert = addHook((code, filename) => {
       ],
     });
   const resultRules = result.metadata.linaria && result.metadata.linaria.rules;
+  console.log(resultRules);
   if (resultRules) Object.assign(linariaRules, resultRules);
   return result.code;
   },
@@ -48,7 +49,6 @@ const { code } = transformSync(`
   });
 eval(code);
 
-console.clear();
 console.log(`
 -----------------------------------------------
 ${emphasize.highlight('css', Object.keys(linariaRules).map(cn => {
