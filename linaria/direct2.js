@@ -1,3 +1,14 @@
+/*
+TODO: make the babel transformation happen in a custom require extension
+  - should key off extension .linaria.jsx
+  - should return exports.default and exports.metadata
+
+  https://gist.github.com/jamestalmage/df922691475cff66c7e6
+  https://github.com/ariporad/pirates
+
+TODO: handle a single argument, to get the filename to transform
+*/
+
 const relFile = 'source.jsx';
 
 require('jsdom-global')();
