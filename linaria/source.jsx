@@ -9,7 +9,6 @@ const MyBox = styled.div`
 
 const myStyles = css`
   background-color: lightblue;
-  background-color: green;
 `;
 
 const danger = css`

@@ -3,7 +3,14 @@ const relFile = 'source.jsx';
 require('jsdom-global')();
 var { readFileSync } = require('fs');
 const { transformSync } = require("@babel/core");
-const { render, prettyDOM } = require('@testing-library/react');
+const { render } = require('@testing-library/react');
+const pretty = require('pretty');
+const emphasize = require('emphasize/lib/core');
+const langCss = require('highlight.js/lib/languages/css');
+const langHtml = require('highlight.js/lib/languages/xml');
+emphasize.registerLanguage('css', langCss)
+emphasize.registerLanguage('html', langHtml)
+
 const filename = `${__dirname}/${relFile}`;
 const testSource = readFileSync(filename, 'utf8');
 const { code, metadata: { linaria: { rules } } } = transformSync(`
@@ -19,16 +26,17 @@ const { code, metadata: { linaria: { rules } } } = transformSync(`
   });
 let container;
 eval(code);
+console.clear();
 console.log(`
 -----------------------------------------------
-${Object.keys(rules).map(cn => {
+${emphasize.highlight('css', Object.keys(rules).map(cn => {
   return `
 /* ${rules[cn].displayName} */
 ${cn} {
   ${rules[cn].cssText.trim()}
 }
 `.trim();
-}).join('\n\n')}
+}).join('\n\n')).value}
 
-${prettyDOM(container)}
+${emphasize.highlight('html', pretty(container.innerHTML)).value}
 `);
