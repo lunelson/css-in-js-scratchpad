@@ -1,4 +1,5 @@
 //#region setup
+
 ({
   babel: {
     presets: [
@@ -23,6 +24,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import styled, { css, createGlobalStyle } from 'styled-components';
+
 //#endregion
 
 const MyBox = styled.div`

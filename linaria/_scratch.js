@@ -1,12 +1,12 @@
 ({
-  "babel": {
-    "presets": [
+  babel: {
+    presets: [
       "@babel/preset-env",
       "@babel/preset-react",
       "linaria/babel"
     ],
   },
-  "plugins": [
+  plugins: [
     "jsdom-quokka-plugin"
   ]
 });
