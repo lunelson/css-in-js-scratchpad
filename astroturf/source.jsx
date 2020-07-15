@@ -28,7 +28,7 @@ const globalStyles = css`
   }
 `;
 
-export default () => (
+const Test = () => (
   <>
     <div className={styles.base} >
       <MyBox />
