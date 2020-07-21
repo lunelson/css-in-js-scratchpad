@@ -1,19 +1,11 @@
 import React from 'react';
-import { styled } from 'linaria/react';
-import { css, cx } from 'linaria';
-
-import SubComponent from './source2';
-
-const MyBox = styled.div`
-  --font-alias: ${props => props.fa||'sans'};
-  color: red;
-  height: 200px;
-  &:hover { color: blue; }
-  & > * { margin-top: 1em; }
-`;
+import { css, cx, injectGlobal } from '@emotion/css';
 
 const myStyles = css`
   background-color: green;
+  &+& {
+    margin-top: 20px;
+  }
 `;
 
 const danger = css`
@@ -28,31 +20,28 @@ const base = css`
   color: beige;
 `
 
-export const globals = css`
-  :global() {
-    html {
-      box-sizing: border-box;
-    }
-
-    *,
-    *:before,
-    *:after {
-      box-sizing: inherit;
-    }
-
-    @font-face {
-      font-family: 'MaterialIcons';
-      src: url(../assets/fonts/MaterialIcons.ttf) format('truetype');
-    }
+injectGlobal`
+  html {
+    box-sizing: border-box;
   }
-`;
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+
+  @font-face {
+    font-family: 'MaterialIcons';
+    src: url(../assets/fonts/MaterialIcons.ttf) format('truetype');
+  }
+`
 
 const Test = () => (
   <>
+    <div className={cx()}></div>
     <p className={cx(myStyles)}>This is the content of a paragraph</p>
-    <SubComponent/>
     <div className={cx(base, danger)} >
-      <MyBox fa='mono' className={css`color: green;`} />
     </div>
   </>
 )

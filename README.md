@@ -6,6 +6,8 @@ Emotion @next (11)
 https://deploy-preview-1600--emotion.netlify.app/
 https://github.com/emotion-js/emotion/pull/1600
 
+NB: configure the packages correctly: https://deploy-preview-1600--emotion.netlify.app/docs/package-summary
+
 Linaria
 https://github.com/callstack/linaria
 https://linaria.now.sh/
