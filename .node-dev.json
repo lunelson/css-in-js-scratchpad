@@ -1,0 +1,7 @@
+{
+  "clear": true,
+  "respawn": true,
+  "ignore": [
+    "node_modules"
+  ]
+}
