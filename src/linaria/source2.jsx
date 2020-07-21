@@ -6,10 +6,8 @@ const fooBar = css`
   content: 'foobar';
 `;
 
-const SubComponent = () => (
+export const SubComponent = () => (
   <>
     <p className={fooBar}></p>
   </>
 )
-
-export default SubComponent;

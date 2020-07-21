@@ -2,7 +2,7 @@ import React from 'react';
 import { styled } from 'linaria/react';
 import { css, cx } from 'linaria';
 
-import SubComponent from './source2';
+import { SubComponent } from './source2';
 
 const MyBox = styled.div`
   --font-alias: ${props => props.fa||'sans'};
@@ -28,7 +28,7 @@ const base = css`
   color: beige;
 `
 
-export const globals = css`
+const globals = css`
   :global() {
     html {
       box-sizing: border-box;
@@ -47,7 +47,7 @@ export const globals = css`
   }
 `;
 
-const Test = () => (
+export const Test = () => (
   <>
     <p className={cx(myStyles)}>This is the content of a paragraph</p>
     <SubComponent/>
@@ -56,5 +56,3 @@ const Test = () => (
     </div>
   </>
 )
-
-export default Test;

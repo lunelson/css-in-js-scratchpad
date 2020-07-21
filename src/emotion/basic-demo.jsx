@@ -37,7 +37,7 @@ injectGlobal`
   }
 `
 
-const Test = () => (
+export const Test = () => (
   <>
     <div className={cx()}></div>
     <p className={cx(myStyles)}>This is the content of a paragraph</p>
@@ -45,5 +45,3 @@ const Test = () => (
     </div>
   </>
 )
-
-export default Test;

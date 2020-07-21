@@ -1,7 +1,8 @@
+import React from 'react';
 import { css, cx, Global, ClassNames } from '@emotion/react'
 import styled from '@emotion/styled';
 
-const Test = () => (
+export const Test = () => (
   <div css={{ color: 'hotpink' }}>
     <div
       css={css`
@@ -30,5 +31,3 @@ const Test = () => (
     </ClassNames>
   </div>
 )
-
-export default Test;
