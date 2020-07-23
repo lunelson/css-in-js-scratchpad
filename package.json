@@ -8,8 +8,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "linaria": "node-dev ./lib/log-linaria.js",
-    "emotion": "node-dev ./lib/log-emotion.js"
+    "linaria": "NODE_ENV=production node-dev ./lib/log-linaria.js",
+    "emotion": "NODE_ENV=production node-dev ./lib/log-emotion.js"
   },
   "dependencies": {
     "@babel/core": "^7.10.2",
@@ -26,26 +26,20 @@
     "@emotion/jest": "^11.0.0-next.13",
     "@emotion/react": "^11.0.0-next.13",
     "@emotion/styled": "^11.0.0-next.13",
-    "@testing-library/react": "^10.3.0",
     "astroturf": "^0.10.4",
-    "babel-node": "^0.0.1-security",
-    "babel-plugin-detective": "^2.0.0",
     "babel-plugin-styled-components": "^1.10.7",
-    "css-format": "^1.0.0",
+    "classnames": "^2.2.6",
+    "clsx": "^1.1.1",
     "emphasize": "^4.0.0",
     "highlight.js": "^10.1.1",
     "jsdom": "^16.3.0",
     "jsdom-global": "^3.0.2",
     "linaria": "^2.0.0-alpha.5",
     "node-dev": "^5.0.0",
+    "pirates": "^4.0.1",
     "prettier": "^2.0.5",
-    "pretty": "^2.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "require-extension-hooks": "^0.3.3",
     "styled-components": "^5.1.1"
-  },
-  "devDependencies": {
-    "babel-plugin-emotion": "^10.0.33"
   }
 }
