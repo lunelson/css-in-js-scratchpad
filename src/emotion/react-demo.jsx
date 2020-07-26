@@ -3,7 +3,7 @@ import { css, jsx, Global, ClassNames } from '@emotion/react'
 import styled from '@emotion/styled';
 
 const mystyle = css`
-  /* label: foobar; */
+  label: foobar;
   content: overridden;
   color: green;
 `;
@@ -19,8 +19,8 @@ const Box = ({ as='div', css:cssArg=[], children, ...rest }={}) => {
 
 
 export const Test = () => (
-  <div css={{ color: 'hotpink' }}>
-    <Box as='p' css={css`content: other; background: blue;`}/>
+  <div css={{ color: 'hotpink', marginLeft: '2rem' }}>
+    <Box as='p' css={[css`content: other; background: blue;`, mystyle]}/>
     <p css={[{
       '@media (min-width: 50em)': {
         color: 'blue',

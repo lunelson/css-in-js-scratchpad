@@ -6,7 +6,12 @@ Emotion @next (11)
 https://deploy-preview-1600--emotion.netlify.app/
 https://github.com/emotion-js/emotion/pull/1600
 
-NB: configure the packages correctly: https://deploy-preview-1600--emotion.netlify.app/docs/package-summary
+  NB: Gatsby and Next.js implementation patterns
+  https://deploy-preview-1600--emotion.netlify.app/docs/ssr
+  https://github.com/emotion-js/emotion/blob/next/site/README.md
+  https://github.com/vercel/next.js/blob/canary/examples/with-emotion-11/README.md
+
+  NB: configure the packages correctly: https://deploy-preview-1600--emotion.netlify.app/docs/package-summary
 
 Linaria
 https://github.com/callstack/linaria
