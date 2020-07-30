@@ -9,9 +9,9 @@ const { transformSync } = require("@babel/core");
 const pretty = require('pretty');
 const emphasize = require('emphasize/lib/core');
 const langCss = require('highlight.js/lib/languages/css');
-const langHtml = require('highlight.js/lib/languages/xml');
+const langXml = require('highlight.js/lib/languages/xml');
 emphasize.registerLanguage('css', langCss)
-emphasize.registerLanguage('html', langHtml)
+emphasize.registerLanguage('html', langXml)
 
 const filename = `${__dirname}/${relFile}`;
 const linariaRules = {};
