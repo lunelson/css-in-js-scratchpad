@@ -1,11 +1,18 @@
 # css-in-js-scratchpad
 
-CLI scripts for inspecting the output from popular CSS-in-JS libs.
+CLI scripts for inspecting the output from popular CSS-in-JS libs. Supported so far:
+
+- emotion
+- styled-components
+- linaria (partial)
 
 ## Instructions
 
-1. Place source files under their respective compiler subfolder in `src`.
-2. Open a terminal and invoke the appropriate script:
+1. Each source file must import `React` and whatever CSS-in-JS library functions they are using.
+2. Each source file must export a React component called `Test`, as a named export.
+2. Source files must be placed in their respective library subfolder in `src`.
+
+Open a terminal and invoke the appropriate script for your source file:
 
 ```sh
 # for files under src/emotion/
@@ -17,6 +24,8 @@ yarn styled-components source-filename.jsx
 # for files under src/linaria/
 yarn linaria source-filename.jsx
 ```
+
+Check the existing source files for examples 😉.
 
 ## Reference Links
 
