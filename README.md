@@ -2,17 +2,18 @@
 
 CLI scripts for inspecting the output from popular CSS-in-JS libs. Supported so far:
 
-- emotion
-- styled-components
-- linaria (partial)
+- [emotion (v11.0.0-next, unreleased)](https://deploy-preview-1600--emotion.netlify.app/)
+- [linaria (v2.0.0-alpha, unreleased—partial support only)](https://github.com/callstack/linaria)
+- [styled-components (v5.1.x)](https://styled-components.com/docs/)
+
+(To properly support linaria, and to support astroturf, may require using webpack JS API).
 
 ## Instructions
 
-1. Each source file must import `React` and whatever CSS-in-JS library functions they are using.
-2. Each source file must export a React component called `Test`, as a named export.
-2. Source files must be placed in their respective library subfolder in `src`.
+1. Each source file must import `React` and whatever CSS-in-JS library functions they are using, and export a React component called `Test`, as a named export.
+2. These source files must be placed in their respective library-subfolder under `src`.
 
-Open a terminal and invoke the appropriate script for your source file:
+Open a terminal and run the appropriate script for your source file:
 
 ```sh
 # for files under src/emotion/
@@ -46,14 +47,6 @@ https://styled-components.com/docs/advanced#server-side-rendering
 Linaria
 https://github.com/callstack/linaria
 https://linaria.now.sh/
-https://github.com/thymikee/linaria-jest/
-
-Compiled CSS in JS
-https://github.com/atlassian-labs/compiled-css-in-js
-https://compiledcssinjs.com/
 
 Astroturf
 https://github.com/4Catalyzer/astroturf
-
-JSS
-https://codesandbox.io/s/z21lpmvv33
