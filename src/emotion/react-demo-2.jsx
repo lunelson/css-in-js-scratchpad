@@ -8,6 +8,9 @@ const MyBox = styled.div`
 `;
 
 const mqtest = css`
+  &-modifier {
+    content: 'failure';
+  }
   &+& {
     margin-top: 50px;
     ${(() => css`margin-bottom: 6px;`)()}
@@ -46,7 +49,7 @@ export const Test = () => (
     <Global styles={globalStyles} />
     <div css={stack(20)}>this is 20</div>
     <div css={stack(40)}>this is 40</div>
-    <div css={[mqtest]}>
+    <div className={`${mqtest}-modifier`} css={[mqtest]}>
       <p>is this thing on?</p>
     </div>
     <div css={[base, danger]} >

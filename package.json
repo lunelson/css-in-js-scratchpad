@@ -8,8 +8,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "linaria": "NODE_ENV=production node-dev ./lib/log-linaria.js",
-    "emotion": "NODE_ENV=production node-dev ./lib/ssr-emotion.js"
+    "linaria": "NODE_ENV=production node-dev ./lib/dom-linaria.js",
+    "emotion": "NODE_ENV=production node-dev ./lib/ssr-emotion.js",
+    "ci": "yarn install --frozen-lockfile",
+    "u": "yarn upgrade-interactive --latest"
   },
   "dependencies": {
     "@babel/core": "^7.10.2",

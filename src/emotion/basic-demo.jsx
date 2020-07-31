@@ -1,5 +1,6 @@
 import React from 'react';
 import { css, cx, injectGlobal } from '@emotion/css';
+import cn from 'clsx';
 
 const myStyles = css`
   background-color: green;
@@ -18,6 +19,9 @@ const base = css`
   background-color: darkgreen;
   margin-left: 2rem;
   color: beige;
+  &-modifier {
+    border-color: green;
+  }
 `
 
 injectGlobal`
@@ -41,7 +45,7 @@ export const Test = () => (
   <>
     <div className={cx()}></div>
     <p className={cx(myStyles)}>This is the content of a paragraph</p>
-    <div className={cx(base, danger)} >
+    <div className={cn(base, danger, `${base}-modifier`)} >
     </div>
   </>
 )
