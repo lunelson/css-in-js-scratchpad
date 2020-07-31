@@ -10,6 +10,7 @@
   "scripts": {
     "linaria": "NODE_ENV=production node-dev ./lib/dom-linaria.js",
     "emotion": "NODE_ENV=production node-dev ./lib/ssr-emotion.js",
+    "styled-components": "NODE_ENV=production node-dev ./lib/ssr-styled-components.js",
     "ci": "yarn install --frozen-lockfile",
     "u": "yarn upgrade-interactive --latest"
   },
