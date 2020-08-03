@@ -10,8 +10,8 @@ CLI scripts for inspecting the output from popular CSS-in-JS libs. Supported so 
 
 ## Instructions
 
-1. Each source file must import `React` and whatever CSS-in-JS library functions they are using, and export a React component called `Test`, as a named export.
-2. These source files must be placed in their respective library-subfolder under `src`.
+1. Each source file must (A) import `React`, as well as whatever CSS-in-JS library functions they are using, and (B) export a React component called `Test`, as a _named export_ (not default).
+2. These source files must be placed in their CSS-in-JS library-respective subfolder under `src`.
 
 Open a terminal and run the appropriate script for your source file:
 
@@ -30,16 +30,9 @@ Check the existing source files for examples 😉.
 
 ## Reference Links
 
-Emotion @next (11)
+Emotion 11 (next)
 https://deploy-preview-1600--emotion.netlify.app/
 https://github.com/emotion-js/emotion/pull/1600
-
-- NB: Gatsby and Next.js implementation patterns
-  https://deploy-preview-1600--emotion.netlify.app/docs/ssr
-  https://github.com/emotion-js/emotion/blob/next/site/README.md
-  https://github.com/vercel/next.js/blob/canary/examples/with-emotion-11/README.md
-
-- NB: configure the packages correctly: https://deploy-preview-1600--emotion.netlify.app/docs/package-summary
 
 Styled Components
 https://styled-components.com/docs/advanced#server-side-rendering
