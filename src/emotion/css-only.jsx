@@ -8,7 +8,7 @@ const mystyle = css`
 
 const fnClass = (mb) => css`margin-bottom: ${mb};`;
 
-injectGlobal`
+injectGlobal/* css */`
 .foo { cursor: pointer; }
 .bar {
   height: stretch;
