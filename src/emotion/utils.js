@@ -21,6 +21,22 @@ export const isSet = (value) => classof(value) === 'Set';
 export const isWeakMap = (value) => classof(value) === 'WeakMap';
 export const isWeakSet = (value) => classof(value) === 'WeakSet';
 
+// export function memoize( fn ) {
+//   return function (...args) {
+//     hash = "",
+//     i = args.length;
+//     currentArg = null;
+//     while (i--) {
+//       currentArg = args[i];
+//       hash += (currentArg === Object(currentArg)) ?
+//       JSON.stringify(currentArg) : currentArg;
+//       fn.memoize || (fn.memoize = {});
+//     }
+//     return (hash in fn.memoize) ? fn.memoize[hash] :
+//     fn.memoize[hash] = fn.apply(this, args);
+//   };
+// }
+
 export const breakpoints = {
   xs: 24,
   s: 32,
@@ -30,17 +46,18 @@ export const breakpoints = {
   xl: 96,
 };
 
-export function parseValue(n) {
-  const type = typeof n;
-  if (!['string', 'number'].includes(type)) {
-    throw Error(`invalid type for CSS value: ${type}`);
-  }
-  n = type === 'string' ? n.trim() : n;
-  const value = parseFloat(n);
-  if (Number.isNaN(value)) return { value: n };
-  const unit = type === 'string' ? n.replace(value, '') : '';
-  return { value, unit };
-}
+// export function parseValue(n) {
+//   const type = typeof n;
+//   if (!['string', 'number'].includes(type)) {
+//     throw Error(`invalid type for CSS value: ${type}`);
+//   }
+//   n = type === 'string' ? n.trim() : n;
+//   const value = parseFloat(n);
+//   if (Number.isNaN(value)) return { value: n };
+//   const unit = type === 'string' ? n.replace(value, '') : '';
+//   return { value, unit };
+// }
+
 export function stringifyValue(n, fn) {
   n = typeof n === 'string' ? n.trim() : n;
   const number = parseFloat(n);
@@ -48,12 +65,13 @@ export function stringifyValue(n, fn) {
   const unit = String(n).replace(number, '');
   return `${fn ? fn(number) : number}${unit || 'px'}`;
 }
-export function assertUnit(n, unit = 'px') {
-  n = typeof n === 'string' ? n.trim() : n;
-  const number = parseFloat(n);
-  if (Number.isNaN(number)) return n;
-  return `${number}${unit}`;
-}
+
+// export function assertUnit(n, unit = 'px') {
+//   n = typeof n === 'string' ? n.trim() : n;
+//   const number = parseFloat(n);
+//   if (Number.isNaN(number)) return n;
+//   return `${number}${unit}`;
+// }
 
 export function queryString(query) {
   let [lo, hi] = [].concat(query);
@@ -73,30 +91,22 @@ export const media = (query, expr) => {
 
 export function isBreakPointObj(obj) {
   return isObject(obj)
-    // && '_' in obj
-    && Object.keys(obj).every(key => key == '_' || key in breakpoints);
+  // && '_' in obj
+  && Object.keys(obj).every(key => key == '_' || key in breakpoints);
 }
 
 export function responsiveClass(bk, key) {
   return bk=='_' ? `${key}` : `${bk}__${key}`;
 }
 
-export function reduceStyleProp(prop, key) {
-  const classes = []; const styles = [];
-  for (const bk in prop) {
-    classes.push(responsiveClass(bk, key));
-    styles.push(media(bk, `--${key}: ${stringifyValue(prop[bk])}`))
-  }
-  return [classes, styles];
-}
-
-export function gatherStyleProps(props, stylePropKeys) {
-  return Object.keys(props).reduce((arr, key) => {
-    if (~stylePropKeys.indexOf(key)) arr[0][key] = props[key];
-    else arr[1][key] = props[key];
-    return arr;
-  }, [{}, {}]);
-}
+// export function reduceStyleProp(prop, key) {
+//   const classes = []; const styles = [];
+//   for (const bk in prop) {
+//     classes.push(responsiveClass(bk, key));
+//     styles.push(media(bk, `--${key}: ${stringifyValue(prop[bk])}`))
+//   }
+//   return [classes, styles];
+// }
 
 export const stylePropKeys = `
 
@@ -116,37 +126,67 @@ gapY
 
 `.trim().split('\n').filter(Boolean);
 
-// export function gatherStyleProps2(props) {
-//   const classes = [];
-//   const styles = [];
-//   return [classes, styles, Object.keys(props).reduce((obj, key) => {
-//     if (~stylePropKeys.indexOf(key)) {
-//       let prop = props[key]; //?
-//       prop = isBreakPointObj(prop) ? prop : { _: prop };
-//       for (const bk in prop) {
-//         classes.push(responsiveClass(bk, key));
-//         styles.push(media(bk, `--${key}: ${stringifyValue(prop[bk])}`))
-//       }
-//     }
-//     else obj[key] = props[key];
-//     return obj;
-//   }, {})];
+// export function gatherStyleProps(props) {
+//   const keys = Object.keys(props), styleProps = {}, restProps = {};
+//   let n = keys.length, key = undefined;
+//   while (n--) {
+//     key = keys[n];
+//     if (~stylePropKeys.indexOf(key)) styleProps[key] = props[key];
+//     else restProps[key] = props[key];
+//   }
+//   return [styleProps, restProps];
 // }
 
+export function parseStylePropValue(value, key) {
+  /*
+
+  TODO: look up special value output rules here
+
+  - css keyword value -> output
+  - sys keyword value -> parse value and output
+  - theme key -> look up and output
+
+  */
+  return stringifyValue(value);
+}
+
 export function parseStyleProps(props) {
-  const classNames = [], styleRules = [];
-  const restProps = Object.keys(props).reduce((obj, key) => {
-    if (~stylePropKeys.indexOf(key)) {
-      let prop = props[key];
+  const
+    propKeys = Object.keys(props),
+    classNames = [],
+    styleRules = [],
+    restProps = {};
+  let n = propKeys.length,
+    propKey = undefined;
+  while (n--) {
+    propKey = propKeys[n];
+    if (~stylePropKeys.indexOf(propKey)) {
+      let prop = props[propKey];
       prop = isBreakPointObj(prop) ? prop : { _: prop };
       for (const bk in prop) {
-        classNames.push(responsiveClass(bk, key));
-        styleRules.push(media(bk, `--${key}: ${stringifyValue(prop[bk])};`));
+        classNames.push(responsiveClass(bk, propKey));
+        styleRules.push(media(bk, `--${propKey}: ${parseStylePropValue(prop[bk])};`));
       }
     }
-    else
-      obj[key] = props[key];
-    return obj;
-  }, {});
+    else restProps[propKey] = props[propKey];
+  }
   return [classNames.concat(css`${styleRules}`), restProps];
 }
+
+// export function parseStyleProps(props) {
+//   const classNames = [], styleRules = [];
+//   const restProps = Object.keys(props).reduce((obj, key) => {
+//     if (~stylePropKeys.indexOf(key)) {
+//       let prop = props[key];
+//       prop = isBreakPointObj(prop) ? prop : { _: prop };
+//       for (const bk in prop) {
+//         classNames.push(responsiveClass(bk, key));
+//         styleRules.push(media(bk, `--${key}: ${stringifyValue(prop[bk])};`));
+//       }
+//     }
+//     else
+//     obj[key] = props[key];
+//     return obj;
+//   }, {});
+//   return [classNames.concat(css`${styleRules}`), restProps];
+// }

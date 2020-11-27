@@ -11,6 +11,8 @@ import {
   responsiveClass,
   reduceStyleProp,
   gatherStyleProps,
+  parseStyleProps,
+  memoize,
  } from './utils';
 
 // console.log(parseCssValue('35'))
@@ -76,6 +78,17 @@ export function gatherStyleProps2(props, stylePropKeys) {
 // isBreakPointObj({_: 30, m: 20, l: 0}); //?
 // reduceStyleProp({_: 30, m: 20, l: 0}, 'mt'); //?
 
+export function gatherStylePropsMemo(props) {
+  const keys = Object.keys(props), styleProps = {}, restProps = {};
+  let n = keys.length, key = undefined;
+  while (n--) {
+    key = keys[n];
+    if (~stylePropKeys.indexOf(key)) styleProps[key] = props[key];
+    else restProps[key] = props[key];
+  }
+  return [styleProps, restProps];
+}
+
 (function(){
   const props = {
     py: 20,
@@ -84,8 +97,9 @@ export function gatherStyleProps2(props, stylePropKeys) {
     gapY: 20,
     children: [],
   };
-  const [classes, styles, restProps] = gatherStyleProps2(props, stylePropKeys);
+  // gatherStylePropsMemo(props); //?
+  const [classes, restProps] = parseStyleProps(props, stylePropKeys);
   classes; //?
-  styles; //?
+  restProps; //?
   // restProps; //?
 })()
